@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>Vue JS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.css">
+    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material"></script>
+</head>
+
+<body>
+    <div id="app">
+        <md-toolbar>
+            <h1 class="md-title">My Title</h1>
+        </md-toolbar>
+
+        <div class="main-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, rerum? Error sunt, aperiam dolores, atque expedita
+                molestiae tenetur. Quis eveniet accusamus velit explicabo adipisci reiciendis modi eaque quas, officia excepturi.</p>
+        </div>
+
+        <md-button class="md-raised md-primary">Button</md-button>
+
+        <input v-model="exampleContent">
+
+        <canvas id="viewport" width="1200" height="900" style="padding: 10px; border:1px;" v-insert-message="exampleContent"></canvas>
+    </div>
+    <script>
+        Vue.use(VueMaterial)
+
+        var App = new Vue({
+            el: '#app',
+            data: {
+                "exampleContent": "This is TEXT"
+            },
+            directives: {
+                insertMessage: function (canvasElement, binding) {
+                    var canvas = document.getElementById('viewport')
+                    var ctx = canvasElement.getContext("2d");
+                    // Clear the canvas
+                    //ctx.clearRect(0, 0, 1200, 900);
+                    // Insert stuff into canvas
+                    base_image = new Image();
+                    base_image.src = 'template/result-template.jpg';
+                    base_image.onload = function () {
+                        ctx.drawImage(base_image, 0, 0);
+                        ctx.font = "24pt Mitr";
+                        ctx.fillStyle = 'white';
+                        ctx.textAlign = "center";
+                        ctx.fillText(binding.value, 347, 434);
+                    }
+                    console.log(ctx.measureText(binding.value).width)
+                }
+            },
+        })
+
+        make_base();
+
+        function make_base() {
+
+
+        }
+    </script>
+</body>
+
+</html>
