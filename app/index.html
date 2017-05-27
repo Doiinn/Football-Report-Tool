@@ -1,7 +1,8 @@
 <html>
 
 <head>
-    <title>Vue JS</title>
+    <title>Rajaoros Futsal Report (Alpha)</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.css">
@@ -13,21 +14,23 @@
 <body>
     <div id="app">
         <md-toolbar>
-            <h1 class="md-title">My Title</h1>
+            <h1 class="md-title">Rajaoros Futsal Report (Alpha)</h1>
         </md-toolbar>
 
         <div class="main-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, rerum? Error sunt, aperiam dolores, atque expedita
-                molestiae tenetur. Quis eveniet accusamus velit explicabo adipisci reiciendis modi eaque quas, officia excepturi.</p>
+            <h2>วิธีการใช้งาน</h2>
+            <p></p>
         </div>
 
-        <md-button class="md-raised md-primary">Button</md-button>
+        <md-input-container>
+            <label>ชื่อทีม Home</label>
+            <md-input v-model="exampleContent"></md-input>
+        </md-input-container>
 
-        <a id="download">Download as image</a>
-
-        <input v-model="exampleContent">
-
-        <canvas id="viewport" width="1200" height="900" style="padding: 10px; border:1px;" v-insert-message="exampleContent"></canvas>
+        <canvas id="viewport" width="1200" height="900" style="width:600px; padding: 10px; border:1px;" v-insert-message="exampleContent"></canvas>
+        <a id="download">
+            <md-button class="md-raised md-primary">Download</md-button>
+        </a>
     </div>
     <script>
         Vue.use(VueMaterial)
@@ -35,6 +38,7 @@
         var size = 24
         var height = 434;
         var dataURL;
+
 
         var App = new Vue({
             el: '#app',
@@ -48,29 +52,32 @@
                     // Clear the canvas
                     //ctx.clearRect(0, 0, 1200, 900);
                     // Insert stuff into canvas
-                    base_image = new Image();
+
+                    var base_image = new Image();
                     base_image.src = 'template/result-template.jpg';
-                    ctx.drawImage(base_image, 0, 0);
-                    ctx.font = size + 'pt "Mitr"';
-                    ctx.fillStyle = 'white';
-                    ctx.textAlign = "center";
-                    ctx.fillText(binding.value, 347, height);
 
-                    if (ctx.measureText(binding.value).width == 0) {
-                        size = 24
-                        height = 434
-                    }
+                    base_image.onload = function () {
+                        ctx.drawImage(base_image, 0, 0);
+                        ctx.font = size + 'pt "Mitr"';
+                        ctx.fillStyle = 'white';
+                        ctx.textAlign = "center";
+                        ctx.fillText(binding.value, 347, height);
 
-                    if (ctx.measureText(binding.value).width >= 273) {
-                        size -= 1
-                        height -= 0.33
-                    }
-                    else if (size < 24) {
-                        size += 1
-                        height += 0.33
-                    }
-                    dataURL = document.getElementById('viewport').toDataURL();
 
+                        if (ctx.measureText(binding.value).width == 0) {
+                            size = 24
+                            height = 434
+                        }
+                        if (ctx.measureText(binding.value).width >= 273) {
+                            size -= 1
+                            height -= 0.33
+                        }
+                        else if (size < 24) {
+                            size += 1
+                            height += 0.33
+                        }
+                        dataURL = document.getElementById('viewport').toDataURL();
+                    }
                     document.getElementById('download').addEventListener('click', function () {
                         downloadCanvas(this, 'test.png');
                     }, false);
@@ -82,9 +89,6 @@
             link.href = dataURL;
             link.download = filename;
         }
-
-
-        console.log(dataURL)
     </script>
 </body>
 
