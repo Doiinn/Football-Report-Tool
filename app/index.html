@@ -23,12 +23,18 @@
 
         <md-button class="md-raised md-primary">Button</md-button>
 
+        <a id="download">Download as image</a>
+
         <input v-model="exampleContent">
 
         <canvas id="viewport" width="1200" height="900" style="padding: 10px; border:1px;" v-insert-message="exampleContent"></canvas>
     </div>
     <script>
         Vue.use(VueMaterial)
+
+        var size = 24
+        var height = 434;
+        var dataURL;
 
         var App = new Vue({
             el: '#app',
@@ -44,24 +50,41 @@
                     // Insert stuff into canvas
                     base_image = new Image();
                     base_image.src = 'template/result-template.jpg';
-                    base_image.onload = function () {
-                        ctx.drawImage(base_image, 0, 0);
-                        ctx.font = "24pt Mitr";
-                        ctx.fillStyle = 'white';
-                        ctx.textAlign = "center";
-                        ctx.fillText(binding.value, 347, 434);
+                    ctx.drawImage(base_image, 0, 0);
+                    ctx.font = size + 'pt "Mitr"';
+                    ctx.fillStyle = 'white';
+                    ctx.textAlign = "center";
+                    ctx.fillText(binding.value, 347, height);
+
+                    if (ctx.measureText(binding.value).width == 0) {
+                        size = 24
+                        height = 434
                     }
-                    console.log(ctx.measureText(binding.value).width)
+
+                    if (ctx.measureText(binding.value).width >= 273) {
+                        size -= 1
+                        height -= 0.33
+                    }
+                    else if (size < 24) {
+                        size += 1
+                        height += 0.33
+                    }
+                    dataURL = document.getElementById('viewport').toDataURL();
+
+                    document.getElementById('download').addEventListener('click', function () {
+                        downloadCanvas(this, 'test.png');
+                    }, false);
                 }
             },
         })
 
-        make_base();
-
-        function make_base() {
-
-
+        function downloadCanvas(link, filename) {
+            link.href = dataURL;
+            link.download = filename;
         }
+
+
+        console.log(dataURL)
     </script>
 </body>
 
