@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Rajaoros Futsal Report (Alpha)</title>
+    <title>Rajaoros Futsal System (Alpha)</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -14,72 +14,360 @@
 <body>
     <div id="app">
         <md-toolbar>
-            <h1 class="md-title">Rajaoros Futsal Report (Alpha)</h1>
+            <h1 class="md-title">Rajaoros Futsal Fixture Generator (Alpha)</h1>
         </md-toolbar>
 
-        <div class="main-content">
-            <h2>วิธีการใช้งาน</h2>
-            <p></p>
+        <div class="main-content" style="padding: 16px;">
+            <h3>วันที่แข่งขัน</h3>
+
+            <md-layout md-gutter>
+                <md-layout md-column md-gutter>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>วันที่</label>
+                            <md-input v-model="dataContent.day"></md-input>
+                        </md-input-container>
+                    </md-layout>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label for="month">เดือน</label>
+                            <md-select name="month" id="month" v-model="dataContent.month">
+                                <md-option value="มกราคม">มกราคม</md-option>
+                                <md-option value="กุมภาพันธ์">กุมภาพันธ์</md-option>
+                                <md-option value="มีนาคม">มีนาคม</md-option>
+                                <md-option value="เมษายน">เมษายน</md-option>
+                                <md-option value="พฤษภาคม">พฤษภาคม</md-option>
+                                <md-option value="มิถุนายน">มิถุนายน</md-option>
+                                <md-option value="กรกฎาคม">กรกฎาคม</md-option>
+                                <md-option value="สิงหาคม">สิงหาคม</md-option>
+                                <md-option value="กันยายน">กันยายน</md-option>
+                                <md-option value="ตุลาคม">ตุลาคม</md-option>
+                                <md-option value="พฤศจิกายน">พฤศจิกายน</md-option>
+                                <md-option value="ธันวาคม">ธันวาคม</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </md-layout>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ปี (พ.ศ.)</label>
+                            <md-input v-model="dataContent.year"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <h3>คู่ที่ 1</h3>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Home</label>
+                            <md-input v-model="dataContent.home1"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Away</label>
+                            <md-input v-model="dataContent.away1"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>เวลาแข่ง</label>
+                            <md-input v-model="dataContent.time1"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <h3>คู่ที่ 2</h3>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Home</label>
+                            <md-input v-model="dataContent.home2"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Away</label>
+                            <md-input v-model="dataContent.away2"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>เวลาแข่ง</label>
+                            <md-input v-model="dataContent.time2"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <h3>คู่ที่ 3</h3>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Home</label>
+                            <md-input v-model="dataContent.home3"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Away</label>
+                            <md-input v-model="dataContent.away3"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>เวลาแข่ง</label>
+                            <md-input v-model="dataContent.time3"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <h3>คู่ที่ 4</h3>
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Home</label>
+                            <md-input v-model="dataContent.home4"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>ชื่อทีม Away</label>
+                            <md-input v-model="dataContent.away4"></md-input>
+                        </md-input-container>
+                    </md-layout>
+
+                    <md-layout md-flex="10">
+                        <md-input-container>
+                            <label>เวลาแข่ง</label>
+                            <md-input v-model="dataContent.time4"></md-input>
+                        </md-input-container>
+                    </md-layout>
+                </md-layout>
+
+                <md-layout md-align="end" style="max-height:500px">
+                    <md-layout style="height:450px">
+                        <canvas id="viewport" width="1200" height="900" style="max-width: 600px; max-height:450px; padding: 10px; border:1px;" v-insert-message="dataContent"></canvas>
+                    </md-layout>
+                    <md-layout>
+                        <a id="download">
+                            <md-button class="md-raised md-primary">Download</md-button>
+                        </a>
+                    </md-layout>
+                </md-layout>
+            </md-layout>
+
         </div>
-
-        <md-input-container>
-            <label>ชื่อทีม Home</label>
-            <md-input v-model="exampleContent"></md-input>
-        </md-input-container>
-
-        <canvas id="viewport" width="1200" height="900" style="width:600px; padding: 10px; border:1px;" v-insert-message="exampleContent"></canvas>
-        <a id="download">
-            <md-button class="md-raised md-primary">Download</md-button>
-        </a>
     </div>
     <script>
         Vue.use(VueMaterial)
 
-        var size = 24
-        var height = 434;
-        var dataURL;
+        var match1_home_size = 24;
+        var match1_home_height = 296;
+        var match1_away_size = 24;
+        var match1_away_height = 296;
+        var height1 = 302;
 
+        var match2_home_size = 24;
+        var match2_home_height = 436;
+        var match2_away_size = 24;
+        var match2_away_height = 436;
+        var height2 = 442;
+
+        var match3_home_size = 24;
+        var match3_home_height = 576;
+        var match3_away_size = 24;
+        var match3_away_height = 576;
+        var height3 = 582;
+
+        var match4_home_size = 24;
+        var match4_home_height = 716;
+        var match4_away_size = 24;
+        var match4_away_height = 716;
+        var height4 = 722;
+
+        var dataURL;
 
         var App = new Vue({
             el: '#app',
             data: {
-                "exampleContent": "This is TEXT"
+                "dataContent": {
+                    "day": "30",
+                    "month": "กุมภาพันธ์",
+                    "year": "2599",
+                    "home1": "ทีม 1A",
+                    "away1": "ทีม 1B",
+                    "time1": "16:00",
+                    "home2": "ทีม 2A",
+                    "away2": "ทีม 2B",
+                    "time2": "16:30",
+                    "home3": "ทีม 3A",
+                    "away3": "ทีม 3B",
+                    "time3": "17:00",
+                    "home4": "ทีม 4A",
+                    "away4": "ทีม 4B",
+                    "time4": "17:30",
+                },
             },
             directives: {
                 insertMessage: function (canvasElement, binding) {
                     var canvas = document.getElementById('viewport')
                     var ctx = canvasElement.getContext("2d");
-                    // Clear the canvas
-                    //ctx.clearRect(0, 0, 1200, 900);
-                    // Insert stuff into canvas
+                    var date_text = binding.value.day+" "+binding.value.month+" "+binding.value.year;
 
                     var base_image = new Image();
-                    base_image.src = 'template/result-template.jpg';
+                    base_image.src = 'template/fixture-template.jpg';
 
                     base_image.onload = function () {
                         ctx.drawImage(base_image, 0, 0);
-                        ctx.font = size + 'pt "Mitr"';
-                        ctx.fillStyle = 'white';
+                        // Date
+                        ctx.textAlign = "right";
+
+                        ctx.fillText(date_text, 1035, 163);
+
+
                         ctx.textAlign = "center";
-                        ctx.fillText(binding.value, 347, height);
+                        ctx.fillStyle = 'white';
+
+                        // Home 1
+                        ctx.font = match1_home_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.home1).width == 0) {
+                            match1_home_size = 24
+                            match1_home_height = 296
+                        }
+                        if (ctx.measureText(binding.value.home1).width >= 273) {
+                            match1_home_size -= 1
+                            match1_home_height -= 0.33
+                        } else if (match1_home_size < 24) {
+                            match1_home_size += 1
+                            match1_home_height += 0.33
+                        }
+                        ctx.fillText(binding.value.home1, 347, match1_home_height);
+
+                        // Away 1
+                        ctx.font = match1_away_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.away1).width == 0) {
+                            match1_away_size = 24
+                            match1_away_height = 296
+                        }
+                        if (ctx.measureText(binding.value.away1).width >= 273) {
+                            match1_away_size -= 1
+                            match1_away_height -= 0.33
+                        } else if (match1_away_size < 24) {
+                            match1_away_size += 1
+                            match1_away_height += 0.33
+                        }
+                        ctx.fillText(binding.value.away1, 853, match1_away_height);
+
+                        // Time 1
+                        ctx.font = '28pt "Mitr"';
+                        ctx.fillText(binding.value.time1, 600, height1);
+
+                        // Home 2
+                        ctx.font = match2_home_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.home2).width == 0) {
+                            match2_home_size = 24
+                            match2_home_height = 436
+                        }
+                        if (ctx.measureText(binding.value.home1).width >= 273) {
+                            match2_home_size -= 1
+                            match2_home_height -= 0.33
+                        } else if (match2_home_size < 24) {
+                            match2_home_size += 1
+                            match2_home_height += 0.33
+                        }
+                        ctx.fillText(binding.value.home2, 347, match2_home_height);
+
+                        // Away 2
+                        ctx.font = match2_away_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.away2).width == 0) {
+                            match1_away_size = 24
+                            match1_away_height = 436
+                        }
+                        if (ctx.measureText(binding.value.away2).width >= 273) {
+                            match2_away_size -= 1
+                            match2_away_height -= 0.33
+                        } else if (match2_away_size < 24) {
+                            match2_away_size += 1
+                            match2_away_height += 0.33
+                        }
+                        ctx.fillText(binding.value.away2, 853, match2_away_height);
+
+                        // Time 2
+                        ctx.font = '28pt "Mitr"';
+                        ctx.fillText(binding.value.time2, 600, height2);
+
+                        // Home 3
+                        ctx.font = match3_home_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.home3).width == 0) {
+                            match3_home_size = 24
+                            match3_home_height = 576
+                        }
+                        if (ctx.measureText(binding.value.home1).width >= 273) {
+                            match3_home_size -= 1
+                            match3_home_height -= 0.33
+                        } else if (match3_home_size < 24) {
+                            match3_home_size += 1
+                            match3_home_height += 0.33
+                        }
+                        ctx.fillText(binding.value.home3, 347, match3_home_height);
+
+                        // Away 3
+                        ctx.font = match3_away_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.away3).width == 0) {
+                            match3_away_size = 24
+                            match3_away_height = 576
+                        }
+                        if (ctx.measureText(binding.value.away3).width >= 273) {
+                            match3_away_size -= 1
+                            match3_away_height -= 0.33
+                        } else if (match3_away_size < 24) {
+                            match3_away_size += 1
+                            match3_away_height += 0.33
+                        }
+                        ctx.fillText(binding.value.away3, 853, match3_away_height);
+
+                        // Time 3
+                        ctx.font = '28pt "Mitr"';
+                        ctx.fillText(binding.value.time3, 600, height3);
+
+                        // Home 4
+                        ctx.font = match4_home_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.home4).width == 0) {
+                            match4_home_size = 24
+                            match4_home_height = 716
+                        }
+                        if (ctx.measureText(binding.value.home1).width >= 273) {
+                            match4_home_size -= 1
+                            match4_home_height -= 0.33
+                        } else if (match4_home_size < 24) {
+                            match4_home_size += 1
+                            match4_home_height += 0.33
+                        }
+                        ctx.fillText(binding.value.home4, 347, match4_home_height);
+
+                        // Away 4
+                        ctx.font = match4_away_size + 'pt "Mitr"';
+                        if (ctx.measureText(binding.value.away4).width == 0) {
+                            match4_away_size = 24
+                            match4_away_height = 716
+                        }
+                        if (ctx.measureText(binding.value.away4).width >= 273) {
+                            match4_away_size -= 1
+                            match4_away_height -= 0.33
+                        } else if (match4_away_size < 24) {
+                            match4_away_size += 1
+                            match4_away_height += 0.33
+                        }
+                        ctx.fillText(binding.value.away4, 853, match4_away_height);
+
+                        // Time 4
+                        ctx.font = '28pt "Mitr"';
+                        ctx.fillText(binding.value.time4, 600, height4);
 
 
-                        if (ctx.measureText(binding.value).width == 0) {
-                            size = 24
-                            height = 434
-                        }
-                        if (ctx.measureText(binding.value).width >= 273) {
-                            size -= 1
-                            height -= 0.33
-                        }
-                        else if (size < 24) {
-                            size += 1
-                            height += 0.33
-                        }
                         dataURL = document.getElementById('viewport').toDataURL();
                     }
                     document.getElementById('download').addEventListener('click', function () {
-                        downloadCanvas(this, 'test.png');
+                        downloadCanvas(this, 'fixture-'+binding.value.day+""+binding.value.month+""+binding.value.year+'.png');
                     }, false);
                 }
             },
